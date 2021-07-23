@@ -3,6 +3,7 @@ import { Route, Switch, useParams } from "react-router-dom";
 import { BigNumber, ethers } from "ethers";
 import StandardFrame from "./StandardFrame";
 import StandardSubtitle from "./StandardSubtitle";
+import TabGroup from "./components/TabGroup";
 import Tab from "./components/Tab";
 import Details from "./transaction/Details";
 import Logs from "./transaction/Logs";
@@ -127,12 +128,12 @@ const Transaction: React.FC = () => {
       <StandardSubtitle>Transaction Details</StandardSubtitle>
       {txData && (
         <SelectionContext.Provider value={selectionCtx}>
-          <div className="flex space-x-2 border-l border-r border-t rounded-t-lg bg-white">
+          <TabGroup>
             <Tab href={`/tx/${txhash}`}>Overview</Tab>
             <Tab href={`/tx/${txhash}/logs`}>
               Logs{txData && ` (${txData.logs.length})`}
             </Tab>
-          </div>
+          </TabGroup>
           <Switch>
             <Route path="/tx/:txhash/" exact>
               <Details
